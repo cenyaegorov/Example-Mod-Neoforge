@@ -1,5 +1,9 @@
 package com.example.examplemod;
 
+import com.example.examplemod.entity.GuardianGolem;
+import com.example.examplemod.entity.ModEntities;
+import net.neoforged.fml.common.EventBusSubscriber;
+import net.neoforged.neoforge.event.entity.EntityAttributeCreationEvent;
 import org.slf4j.Logger;
 
 import com.mojang.logging.LogUtils;
@@ -80,9 +84,11 @@ public class ExampleModNeoforge {
         // Note that this is necessary if and only if we want *this* class (ExampleModNeoforge) to respond directly to events.
         // Do not add this line if there are no @SubscribeEvent-annotated functions in this class, like onServerStarting() below.
         NeoForge.EVENT_BUS.register(this);
+        ModEntities.register(modEventBus);
 
         // Register the item to a creative tab
         modEventBus.addListener(this::addCreative);
+        modEventBus.addListener(this::onEntityAttributeCreation);
 
         // Register our mod's ModConfigSpec so that FML can create and load the config file for us
         modContainer.registerConfig(ModConfig.Type.COMMON, Config.SPEC);
@@ -113,5 +119,9 @@ public class ExampleModNeoforge {
     public void onServerStarting(ServerStartingEvent event) {
         // Do something when the server starts
         LOGGER.info("HELLO from server starting");
+    }
+
+    public void onEntityAttributeCreation(EntityAttributeCreationEvent event){
+        event.put(ModEntities.GUARDIAN_GOLEM.get(), GuardianGolem.createAttributes().build());
     }
 }

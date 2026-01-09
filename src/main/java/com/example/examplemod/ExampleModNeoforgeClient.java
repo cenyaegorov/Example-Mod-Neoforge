@@ -1,12 +1,19 @@
 package com.example.examplemod;
 
+import com.example.examplemod.entity.GuardianGolem;
+import com.example.examplemod.entity.ModEntities;
+import com.example.examplemod.entity.client.GuardianGolemModel;
+import com.example.examplemod.entity.client.GuardianGolemRenderer;
 import net.minecraft.client.Minecraft;
+import net.minecraft.client.renderer.entity.EntityRenderers;
+import net.minecraft.client.renderer.entity.PigRenderer;
 import net.neoforged.api.distmarker.Dist;
 import net.neoforged.bus.api.SubscribeEvent;
 import net.neoforged.fml.ModContainer;
 import net.neoforged.fml.common.EventBusSubscriber;
 import net.neoforged.fml.common.Mod;
 import net.neoforged.fml.event.lifecycle.FMLClientSetupEvent;
+import net.neoforged.neoforge.client.event.EntityRenderersEvent;
 import net.neoforged.neoforge.client.gui.ConfigurationScreen;
 import net.neoforged.neoforge.client.gui.IConfigScreenFactory;
 
@@ -25,7 +32,12 @@ public class ExampleModNeoforgeClient {
     @SubscribeEvent
     static void onClientSetup(FMLClientSetupEvent event) {
         // Some client setup code
+        EntityRenderers.register(ModEntities.GUARDIAN_GOLEM.get(), GuardianGolemRenderer::new);
         ExampleModNeoforge.LOGGER.info("HELLO FROM CLIENT SETUP");
         ExampleModNeoforge.LOGGER.info("MINECRAFT NAME >> {}", Minecraft.getInstance().getUser().getName());
+    }
+    @SubscribeEvent
+    public static void onRegisterLayer(EntityRenderersEvent.RegisterLayerDefinitions event){
+        event.registerLayerDefinition(GuardianGolemModel.LAYER_LOCATION, GuardianGolemModel::createBodyLayer);
     }
 }
