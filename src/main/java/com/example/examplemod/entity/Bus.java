@@ -1,5 +1,6 @@
 package com.example.examplemod.entity;
 
+import com.example.examplemod.entity.goals.BusPlaySoundsGoal;
 import net.minecraft.world.entity.EntityType;
 import net.minecraft.world.entity.ai.attributes.AttributeSupplier;
 import net.minecraft.world.entity.ai.attributes.Attributes;
@@ -33,6 +34,7 @@ public class Bus extends Monster implements GeoAnimatable {
         this.goalSelector.addGoal(3, new WaterAvoidingRandomFlyingGoal(this, 0.8));
         this.goalSelector.addGoal(4, new LookAtPlayerGoal(this, Player.class, 16));
         this.goalSelector.addGoal(5, new RandomLookAroundGoal(this));
+        this.goalSelector.addGoal(5, new BusPlaySoundsGoal(this));
 
         this.targetSelector.addGoal(1, new HurtByTargetGoal(this));
         this.targetSelector.addGoal(2, new NearestAttackableTargetGoal<>(this, Player.class, true));
