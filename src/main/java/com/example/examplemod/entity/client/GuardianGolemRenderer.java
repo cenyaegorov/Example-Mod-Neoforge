@@ -2,6 +2,7 @@ package com.example.examplemod.entity.client;
 
 import com.example.examplemod.ExampleModNeoforge;
 import com.example.examplemod.entity.GuardianGolem;
+import com.mojang.blaze3d.vertex.PoseStack;
 import net.minecraft.client.renderer.entity.EntityRendererProvider;
 import net.minecraft.client.renderer.entity.MobRenderer;
 import net.minecraft.resources.ResourceLocation;
@@ -17,5 +18,6 @@ public class GuardianGolemRenderer extends GeoEntityRenderer<GuardianGolem> {
         super(context, new GuardianGolemModel());
 
         this.shadowRadius = 0.5f;
+        this.withScale(0.5f);
     }
 }
