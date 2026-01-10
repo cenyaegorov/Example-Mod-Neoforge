@@ -3,6 +3,7 @@ package com.example.examplemod;
 import com.example.examplemod.entity.Bus;
 import com.example.examplemod.entity.GuardianGolem;
 import com.example.examplemod.entity.ModEntities;
+import com.example.examplemod.sounds.ModSoundEvents;
 import net.minecraft.world.entity.Mob;
 import net.neoforged.fml.common.EventBusSubscriber;
 import net.neoforged.neoforge.event.entity.EntityAttributeCreationEvent;
@@ -87,6 +88,7 @@ public class ExampleModNeoforge {
         // Do not add this line if there are no @SubscribeEvent-annotated functions in this class, like onServerStarting() below.
         NeoForge.EVENT_BUS.register(this);
         ModEntities.register(modEventBus);
+        ModSoundEvents.register(modEventBus);
 
         // Register the item to a creative tab
         modEventBus.addListener(this::addCreative);

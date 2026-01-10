@@ -1,0 +1,22 @@
+{
+  "entity.bus.idle": {
+    "sounds": [
+      {
+        "name": "examplemodneoforge:bus/idle",
+        "volume": 0.8,
+        "pitch": 1.0
+      }
+    ],
+    "subtitle": "subtitles.examplemodneoforge.entity.bus.idle"
+  },
+  "entity.bus.angry": {
+    "sounds": [
+      {
+        "name": "examplemodneoforge:bus/angry",
+        "volume": 0.8,
+        "pitch": 0.8
+      }
+    ],
+    "subtitle": "subtitles.examplemodneoforge.entity.bus.angry"
+  }
+}
