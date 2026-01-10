@@ -14,7 +14,7 @@ public class ModEntities {
     public static final DeferredHolder<EntityType<?>, EntityType<GuardianGolem>> GUARDIAN_GOLEM =
             ENTITY_TYPES.register("guardian_golem",
                     () -> EntityType.Builder.of(GuardianGolem::new, MobCategory.MONSTER)
-                            .sized(1.5f, 3f)
+                            .sized(5f, 3f)
                             .clientTrackingRange(10)
                             .build("guardian_golem"));
 

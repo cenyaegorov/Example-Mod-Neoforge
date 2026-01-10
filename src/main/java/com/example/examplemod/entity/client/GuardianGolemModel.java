@@ -13,37 +13,22 @@ import net.minecraft.client.model.geom.builders.LayerDefinition;
 import net.minecraft.client.model.geom.builders.MeshDefinition;
 import net.minecraft.client.model.geom.builders.PartDefinition;
 import net.minecraft.resources.ResourceLocation;
+import software.bernie.geckolib.model.GeoModel;
 
-public class GuardianGolemModel extends EntityModel<GuardianGolem> {
-    public static final ModelLayerLocation LAYER_LOCATION = new ModelLayerLocation(
-            ResourceLocation.fromNamespaceAndPath(ExampleModNeoforge.MODID, "guardian_golem"),
-            "main"
-    );
+public class GuardianGolemModel extends GeoModel<GuardianGolem> {
 
-    private final ModelPart root;
-
-    public GuardianGolemModel(ModelPart root) {
-        this.root = root;
-    }
-
-    public static LayerDefinition createBodyLayer(){
-        MeshDefinition meshDefinition = new MeshDefinition();
-        PartDefinition partDefinition = meshDefinition.getRoot();
-
-        partDefinition.addOrReplaceChild("body",
-                CubeListBuilder.create().texOffs(0, 0)
-                        .addBox(-4.0F, -8.0F, -4.0F, 8.0F, 8.0F, 8.0F),
-                PartPose.offset(0.0F, 24.0F, 0.0F));
-
-        return LayerDefinition.create(meshDefinition, 32, 32);
-    }
     @Override
-    public void setupAnim(GuardianGolem guardianGolem, float v, float v1, float v2, float v3, float v4) {
-
+    public ResourceLocation getModelResource(GuardianGolem animatable) {
+        return ResourceLocation.fromNamespaceAndPath(ExampleModNeoforge.MODID, "geo/guardian_golem.geo.json");
     }
 
     @Override
-    public void renderToBuffer(PoseStack poseStack, VertexConsumer vertexConsumer, int i, int i1, int i2) {
-        root.render(poseStack, vertexConsumer, i, i1);
+    public ResourceLocation getTextureResource(GuardianGolem animatable) {
+        return ResourceLocation.fromNamespaceAndPath(ExampleModNeoforge.MODID, "textures/entity/guardian_golem.png");
+    }
+
+    @Override
+    public ResourceLocation getAnimationResource(GuardianGolem animatable) {
+        return null;
     }
 }

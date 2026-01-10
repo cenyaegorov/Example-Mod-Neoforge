@@ -5,17 +5,17 @@ import com.example.examplemod.entity.GuardianGolem;
 import net.minecraft.client.renderer.entity.EntityRendererProvider;
 import net.minecraft.client.renderer.entity.MobRenderer;
 import net.minecraft.resources.ResourceLocation;
+import net.minecraft.world.entity.EntityType;
+import software.bernie.geckolib.renderer.GeoEntityRenderer;
 
-public class GuardianGolemRenderer extends MobRenderer<GuardianGolem, GuardianGolemModel> {
-    private static final ResourceLocation TEXTURE =
-            ResourceLocation.fromNamespaceAndPath(ExampleModNeoforge.MODID, "textures/entity/guardian_golem.png");
+public class GuardianGolemRenderer extends GeoEntityRenderer<GuardianGolem> {
 
-    public GuardianGolemRenderer(EntityRendererProvider.Context context){
-        super(context, new GuardianGolemModel(context.bakeLayer(GuardianGolemModel.LAYER_LOCATION)), 0.5f);
+    public GuardianGolemRenderer(EntityRendererProvider.Context context, EntityType<? extends GuardianGolem> entityType) {
+        super(context, entityType);
     }
+    public GuardianGolemRenderer(EntityRendererProvider.Context context){
+        super(context, new GuardianGolemModel());
 
-    @Override
-    public ResourceLocation getTextureLocation(GuardianGolem guardianGolem) {
-        return TEXTURE;
+        this.shadowRadius = 0.5f;
     }
 }

@@ -36,8 +36,5 @@ public class ExampleModNeoforgeClient {
         ExampleModNeoforge.LOGGER.info("HELLO FROM CLIENT SETUP");
         ExampleModNeoforge.LOGGER.info("MINECRAFT NAME >> {}", Minecraft.getInstance().getUser().getName());
     }
-    @SubscribeEvent
-    public static void onRegisterLayer(EntityRenderersEvent.RegisterLayerDefinitions event){
-        event.registerLayerDefinition(GuardianGolemModel.LAYER_LOCATION, GuardianGolemModel::createBodyLayer);
-    }
+
 }
