@@ -1,7 +1,9 @@
 package com.example.examplemod;
 
+import com.example.examplemod.entity.Bus;
 import com.example.examplemod.entity.GuardianGolem;
 import com.example.examplemod.entity.ModEntities;
+import net.minecraft.world.entity.Mob;
 import net.neoforged.fml.common.EventBusSubscriber;
 import net.neoforged.neoforge.event.entity.EntityAttributeCreationEvent;
 import org.slf4j.Logger;
@@ -123,5 +125,6 @@ public class ExampleModNeoforge {
 
     public void onEntityAttributeCreation(EntityAttributeCreationEvent event){
         event.put(ModEntities.GUARDIAN_GOLEM.get(), GuardianGolem.createAttributes().build());
+        event.put(ModEntities.BUS.get(), Bus.createAttributes().build());
     }
 }

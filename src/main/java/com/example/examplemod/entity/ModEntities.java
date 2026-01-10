@@ -17,6 +17,12 @@ public class ModEntities {
                             .sized(5f, 3f)
                             .clientTrackingRange(10)
                             .build("guardian_golem"));
+    public static final DeferredHolder<EntityType<?>, EntityType<Bus>> BUS =
+            ENTITY_TYPES.register("bus",
+                    () -> EntityType.Builder.of(Bus::new, MobCategory.MONSTER)
+                            .sized(2f, 3f)
+                            .clientTrackingRange(10)
+                            .build("bus"));
 
     public static void register(IEventBus bus){
         ENTITY_TYPES.register(bus);

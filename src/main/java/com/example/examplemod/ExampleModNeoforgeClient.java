@@ -2,6 +2,7 @@ package com.example.examplemod;
 
 import com.example.examplemod.entity.GuardianGolem;
 import com.example.examplemod.entity.ModEntities;
+import com.example.examplemod.entity.client.BusRenderer;
 import com.example.examplemod.entity.client.GuardianGolemModel;
 import com.example.examplemod.entity.client.GuardianGolemRenderer;
 import net.minecraft.client.Minecraft;
@@ -33,6 +34,7 @@ public class ExampleModNeoforgeClient {
     static void onClientSetup(FMLClientSetupEvent event) {
         // Some client setup code
         EntityRenderers.register(ModEntities.GUARDIAN_GOLEM.get(), GuardianGolemRenderer::new);
+        EntityRenderers.register(ModEntities.BUS.get(), BusRenderer::new);
         ExampleModNeoforge.LOGGER.info("HELLO FROM CLIENT SETUP");
         ExampleModNeoforge.LOGGER.info("MINECRAFT NAME >> {}", Minecraft.getInstance().getUser().getName());
     }
