@@ -20,7 +20,7 @@ public class ModEntities {
     public static final DeferredHolder<EntityType<?>, EntityType<Bus>> BUS =
             ENTITY_TYPES.register("bus",
                     () -> EntityType.Builder.of(Bus::new, MobCategory.MONSTER)
-                            .sized(2f, 3f)
+                            .sized(2f, 1f)
                             .clientTrackingRange(10)
                             .build("bus"));
 
