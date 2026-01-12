@@ -5,6 +5,7 @@ import com.example.examplemod.entity.GuardianGolem;
 import com.example.examplemod.entity.ModEntities;
 import com.example.examplemod.sounds.ModSoundEvents;
 import net.neoforged.neoforge.event.entity.EntityAttributeCreationEvent;
+import net.neoforged.neoforge.registries.*;
 import org.slf4j.Logger;
 
 import com.mojang.logging.LogUtils;
@@ -30,10 +31,6 @@ import net.neoforged.fml.event.lifecycle.FMLCommonSetupEvent;
 import net.neoforged.neoforge.common.NeoForge;
 import net.neoforged.neoforge.event.BuildCreativeModeTabContentsEvent;
 import net.neoforged.neoforge.event.server.ServerStartingEvent;
-import net.neoforged.neoforge.registries.DeferredBlock;
-import net.neoforged.neoforge.registries.DeferredHolder;
-import net.neoforged.neoforge.registries.DeferredItem;
-import net.neoforged.neoforge.registries.DeferredRegister;
 
 // The value here should match an entry in the META-INF/neoforge.mods.toml file
 @Mod(ExampleModNeoforge.MODID)
@@ -72,6 +69,7 @@ public class ExampleModNeoforge {
     public ExampleModNeoforge(IEventBus modEventBus, ModContainer modContainer) {
         // Register the commonSetup method for modloading
         modEventBus.addListener(this::commonSetup);
+        modEventBus.addListener(this::registerDataSerializers);
 
         // Register the Deferred Register to the mod event bus so blocks get registered
         BLOCKS.register(modEventBus);
@@ -95,6 +93,9 @@ public class ExampleModNeoforge {
         modContainer.registerConfig(ModConfig.Type.COMMON, Config.SPEC);
     }
 
+    private void registerDataSerializers(RegisterEvent event){
+        ModEntities.registerSerializers(event);
+    }
     private void commonSetup(FMLCommonSetupEvent event) {
         // Some common setup code
         LOGGER.info("HELLO FROM COMMON SETUP");
