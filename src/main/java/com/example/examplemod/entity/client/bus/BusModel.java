@@ -1,7 +1,7 @@
-package com.example.examplemod.entity.client;
+package com.example.examplemod.entity.client.bus;
 
 import com.example.examplemod.ExampleModNeoforge;
-import com.example.examplemod.entity.Bus;
+import com.example.examplemod.entity.bus.Bus;
 import net.minecraft.resources.ResourceLocation;
 import software.bernie.geckolib.model.GeoModel;
 

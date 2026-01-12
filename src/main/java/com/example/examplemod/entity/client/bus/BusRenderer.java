@@ -1,6 +1,6 @@
-package com.example.examplemod.entity.client;
+package com.example.examplemod.entity.client.bus;
 
-import com.example.examplemod.entity.Bus;
+import com.example.examplemod.entity.bus.Bus;
 import net.minecraft.client.renderer.entity.EntityRendererProvider;
 import software.bernie.geckolib.model.GeoModel;
 import software.bernie.geckolib.renderer.GeoEntityRenderer;

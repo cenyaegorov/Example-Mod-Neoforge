@@ -1,11 +1,9 @@
 package com.example.examplemod;
 
-import com.example.examplemod.entity.Bus;
+import com.example.examplemod.entity.bus.Bus;
 import com.example.examplemod.entity.GuardianGolem;
 import com.example.examplemod.entity.ModEntities;
 import com.example.examplemod.sounds.ModSoundEvents;
-import net.minecraft.world.entity.Mob;
-import net.neoforged.fml.common.EventBusSubscriber;
 import net.neoforged.neoforge.event.entity.EntityAttributeCreationEvent;
 import org.slf4j.Logger;
 
@@ -23,7 +21,6 @@ import net.minecraft.world.level.block.Block;
 import net.minecraft.world.level.block.Blocks;
 import net.minecraft.world.level.block.state.BlockBehaviour;
 import net.minecraft.world.level.material.MapColor;
-import net.neoforged.api.distmarker.Dist;
 import net.neoforged.bus.api.IEventBus;
 import net.neoforged.bus.api.SubscribeEvent;
 import net.neoforged.fml.common.Mod;

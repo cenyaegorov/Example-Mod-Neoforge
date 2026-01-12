@@ -1,11 +1,11 @@
 package com.example.examplemod.entity.goals;
 
-import com.example.examplemod.entity.Bus;
+import com.example.examplemod.entity.bus.Bus;
+import com.example.examplemod.entity.bus.BusState;
 import com.example.examplemod.sounds.ModSoundEvents;
 import net.minecraft.world.entity.LivingEntity;
 import net.minecraft.world.entity.ai.goal.Goal;
 import net.minecraft.world.level.Level;
-import net.neoforged.fml.common.Mod;
 
 public class BusPlaySoundsGoal extends Goal {
     private final Bus mob;
@@ -27,13 +27,17 @@ public class BusPlaySoundsGoal extends Goal {
         if (target != null){
             if (!wasAngry){
                 wasAngry = true;
+                this.mob.setState(BusState.ANGRY);
                 playAngrySound();
             }
 
             idleSoundCooldown = 0;
         }
         else {
-            if (wasAngry) wasAngry = false;
+            if (wasAngry) {
+                wasAngry = false;
+                this.mob.setState(BusState.IDLE);
+            }
 
             if (--idleSoundCooldown <= 0){
                 playIdleSound();
