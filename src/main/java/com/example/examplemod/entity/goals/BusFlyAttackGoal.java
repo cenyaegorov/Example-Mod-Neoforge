@@ -4,6 +4,7 @@ import com.example.examplemod.entity.Bus;
 import net.minecraft.sounds.SoundEvents;
 import net.minecraft.world.entity.LivingEntity;
 import net.minecraft.world.entity.ai.goal.Goal;
+import net.minecraft.world.entity.projectile.ShulkerBullet;
 import net.minecraft.world.phys.Vec3;
 
 import java.util.EnumSet;
@@ -37,17 +38,23 @@ public class BusFlyAttackGoal extends Goal {
 
         this.mob.getLookControl().setLookAt(target, 30, 30);
 
-        double speed = 0.15;
+        double speed = 0.05;
         Vec3 movement = new Vec3(target.getX() - mob.getX(), target.getY() + target.getEyeHeight() + 1 - mob.getY(), target.getZ() - mob.getZ()).normalize().scale(speed);
         mob.setDeltaMovement(movement);
 
         updateCooldown--;
         if (updateCooldown < 0){
-            double attackSqrt = 20;
+            double attackSqrt = 400;
             if (mob.distanceToSqr(target) <= attackSqrt){
-                mob.doHurtTarget(target);
+                ShulkerBullet bullet = new ShulkerBullet(this.mob.level(), this.mob, this.target, null);
+                Vec3 spawnPos = this.mob.position().add(0, this.mob.getEyeHeight(), 0).add(this.mob.getLookAngle().scale(1.0));
+                bullet.moveTo(spawnPos, this.mob.getYRot(), this.mob.getXRot());
+                this.mob.level().addFreshEntity(bullet);
+                this.mob.playSound(SoundEvents.SHULKER_SHOOT, 1.0F,
+                        (this.mob.getRandom().nextFloat() - this.mob.getRandom().nextFloat()) * 0.2F + 1.0F);
+
             }
-            updateCooldown = 20;
+            updateCooldown = 20 + this.mob.getRandom().nextInt(20);
         }
     }
     @Override

@@ -62,7 +62,7 @@ public class Bus extends Monster implements GeoAnimatable {
         return Monster.createMonsterAttributes()
                 .add(Attributes.MOVEMENT_SPEED, 0.2)
                 .add(Attributes.ATTACK_DAMAGE, 0.2)
-                .add(Attributes.MAX_HEALTH, 40)
+                .add(Attributes.MAX_HEALTH, 80)
                 .add(Attributes.ARMOR, 10)
                 .add(Attributes.ATTACK_SPEED, 4);
     }
@@ -88,7 +88,7 @@ public class Bus extends Monster implements GeoAnimatable {
     @Override
     public void tick(){
         super.tick();
-        if (!this.level().isClientSide() && !this.entityData.get(isFlyingPhase) && this.getHealth() < this.getMaxHealth() * 0.5){
+        if (!this.level().isClientSide() && !this.entityData.get(isFlyingPhase) && this.getHealth() < this.getMaxHealth() * 0.7){
             this.enterFlyingPhase();
         }
     }
