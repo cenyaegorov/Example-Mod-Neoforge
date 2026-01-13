@@ -14,6 +14,7 @@ import net.minecraft.world.entity.ai.attributes.Attributes;
 import net.minecraft.world.entity.ai.goal.*;
 import net.minecraft.world.entity.ai.goal.target.HurtByTargetGoal;
 import net.minecraft.world.entity.ai.goal.target.NearestAttackableTargetGoal;
+import net.minecraft.world.entity.ai.goal.target.OwnerHurtByTargetGoal;
 import net.minecraft.world.entity.monster.Monster;
 import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.level.Level;
@@ -118,5 +119,10 @@ public class Bus extends Monster implements GeoAnimatable {
     }
     public boolean isFlyingPhase(){
         return this.entityData.get(isFlyingPhase);
+    }
+    public void subdued(){
+        this.goalSelector.removeGoal(meleeAttackGoal);
+        this.goalSelector.removeGoal(busFlyAttackGoal);
+        this.goalSelector.removeGoal(leapAtTargetGoal);
     }
 }

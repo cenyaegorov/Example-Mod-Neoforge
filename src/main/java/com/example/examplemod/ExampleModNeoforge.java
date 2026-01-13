@@ -3,7 +3,9 @@ package com.example.examplemod;
 import com.example.examplemod.entity.bus.Bus;
 import com.example.examplemod.entity.GuardianGolem;
 import com.example.examplemod.entity.ModEntities;
+import com.example.examplemod.item.ExampleItem;
 import com.example.examplemod.sounds.ModSoundEvents;
+import net.neoforged.neoforge.capabilities.RegisterCapabilitiesEvent;
 import net.neoforged.neoforge.event.entity.EntityAttributeCreationEvent;
 import net.neoforged.neoforge.registries.*;
 import org.slf4j.Logger;
@@ -52,8 +54,7 @@ public class ExampleModNeoforge {
     public static final DeferredItem<BlockItem> EXAMPLE_BLOCK_ITEM = ITEMS.registerSimpleBlockItem("example_block", EXAMPLE_BLOCK);
 
     // Creates a new food item with the id "examplemodneoforge:example_id", nutrition 1 and saturation 2
-    public static final DeferredItem<Item> EXAMPLE_ITEM = ITEMS.registerSimpleItem("example_item", new Item.Properties().food(new FoodProperties.Builder()
-            .alwaysEdible().nutrition(1).saturationModifier(2f).build()));
+    public static final DeferredItem<Item> EXAMPLE_ITEM = ITEMS.register("example_item", ExampleItem::new);
 
     // Creates a creative tab with the id "examplemodneoforge:example_tab" for the example item, that is placed after the combat tab
     public static final DeferredHolder<CreativeModeTab, CreativeModeTab> EXAMPLE_TAB = CREATIVE_MODE_TABS.register("example_tab", () -> CreativeModeTab.builder()
@@ -88,11 +89,15 @@ public class ExampleModNeoforge {
         // Register the item to a creative tab
         modEventBus.addListener(this::addCreative);
         modEventBus.addListener(this::onEntityAttributeCreation);
+        modEventBus.addListener(this::registerCapabilities);
 
         // Register our mod's ModConfigSpec so that FML can create and load the config file for us
         modContainer.registerConfig(ModConfig.Type.COMMON, Config.SPEC);
     }
 
+    private void registerCapabilities(RegisterCapabilitiesEvent event){
+        ModCapabilities.registerCapabilities(event);
+    }
     private void registerDataSerializers(RegisterEvent event){
         ModEntities.registerSerializers(event);
     }
