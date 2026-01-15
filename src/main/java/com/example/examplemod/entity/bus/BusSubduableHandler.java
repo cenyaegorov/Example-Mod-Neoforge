@@ -1,5 +1,6 @@
 package com.example.examplemod.entity.bus;
 
+import com.example.examplemod.ModDataComponents;
 import com.example.examplemod.entity.ISubduableMob;
 import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.item.ItemStack;
@@ -19,7 +20,7 @@ public class BusSubduableHandler implements ISubduableMob {
 
     @Override
     public boolean canBeSubdued(Player player, ItemStack item) {
-        return !isSubdued() && mob.getHealth() < mob.getMaxHealth() * 0.5;
+        return !isSubdued() && mob.getHealth() < mob.getMaxHealth() * 0.5 && item.getOrDefault(ModDataComponents.ITEM_LEVEL, 0) >= 1;
     }
 
     @Override

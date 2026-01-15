@@ -1,6 +1,7 @@
 package com.example.examplemod.item;
 
 import com.example.examplemod.ModCapabilities;
+import com.example.examplemod.ModDataComponents;
 import com.example.examplemod.entity.ISubduableMob;
 import net.minecraft.network.chat.Component;
 import net.minecraft.world.InteractionHand;
@@ -16,7 +17,7 @@ import org.jetbrains.annotations.NotNull;
 
 public class ExampleItem extends Item{
     public ExampleItem(){
-        super(new Item.Properties().stacksTo(1).durability(100).rarity(Rarity.UNCOMMON));
+        super(new Item.Properties().stacksTo(1).durability(100).rarity(Rarity.UNCOMMON).component(ModDataComponents.ITEM_LEVEL, 1));
     }
 
     @Override

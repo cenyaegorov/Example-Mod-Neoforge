@@ -85,6 +85,7 @@ public class ExampleModNeoforge {
         NeoForge.EVENT_BUS.register(this);
         ModEntities.register(modEventBus);
         ModSoundEvents.register(modEventBus);
+        ModDataComponents.register(modEventBus);
 
         // Register the item to a creative tab
         modEventBus.addListener(this::addCreative);
