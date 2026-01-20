@@ -2,6 +2,7 @@ package com.example.examplemod.entity.bus;
 
 import com.example.examplemod.entity.ModEntities;
 import com.example.examplemod.entity.goals.BusFlyAttackGoal;
+import com.example.examplemod.entity.goals.BusJumpGoal;
 import com.example.examplemod.entity.goals.BusPlaySoundsGoal;
 import net.minecraft.network.syncher.EntityDataAccessor;
 import net.minecraft.network.syncher.EntityDataSerializers;
@@ -32,9 +33,9 @@ public class Bus extends Monster implements GeoAnimatable {
     private final AnimatableInstanceCache cache = GeckoLibUtil.createInstanceCache(this);
 
     private MeleeAttackGoal meleeAttackGoal;
-    private LeapAtTargetGoal leapAtTargetGoal;
     private WaterAvoidingRandomFlyingGoal waterAvoidingRandomFlyingGoal;
     private BusFlyAttackGoal busFlyAttackGoal;
+    private BusJumpGoal busJumpGoal;
 
     public Bus(EntityType<? extends Monster> entityType, Level level) {
         super(entityType, level);
@@ -43,13 +44,13 @@ public class Bus extends Monster implements GeoAnimatable {
     @Override
     protected void registerGoals(){
         this.meleeAttackGoal = new MeleeAttackGoal(this, BusConfig.ATTACK_MOVEMENT_SPEED, true);
-        this.leapAtTargetGoal = new LeapAtTargetGoal(this, 1);
         this.waterAvoidingRandomFlyingGoal = new WaterAvoidingRandomFlyingGoal(this, 0.8);
         this.busFlyAttackGoal = new BusFlyAttackGoal(this);
+        this.busJumpGoal = new BusJumpGoal(this);
 
         this.goalSelector.addGoal(1, new FloatGoal(this));
         this.goalSelector.addGoal(2, meleeAttackGoal);
-        this.goalSelector.addGoal(2, leapAtTargetGoal);
+        this.goalSelector.addGoal(2, busJumpGoal);
         this.goalSelector.addGoal(3, waterAvoidingRandomFlyingGoal);
         this.goalSelector.addGoal(4, new LookAtPlayerGoal(this, Player.class, BusConfig.LOOK_DISTANCE));
         this.goalSelector.addGoal(5, new RandomLookAroundGoal(this));
@@ -57,6 +58,7 @@ public class Bus extends Monster implements GeoAnimatable {
 
         this.targetSelector.addGoal(1, new HurtByTargetGoal(this));
         this.targetSelector.addGoal(2, new NearestAttackableTargetGoal<>(this, Player.class, true));
+        //this.targetSelector.addGoal(1, busJumpGoal);
     }
 
     public static AttributeSupplier.Builder createAttributes(){
@@ -91,7 +93,7 @@ public class Bus extends Monster implements GeoAnimatable {
     @Override
     public void tick(){
         super.tick();
-        if (!this.level().isClientSide() && !this.entityData.get(isFlyingPhase) && this.getHealth() < this.getMaxHealth() * 0.7){
+        if (!this.level().isClientSide() && !this.entityData.get(isFlyingPhase) && this.getHealth() < this.getMaxHealth() * 0.6){
             this.enterFlyingPhase();
         }
     }
@@ -114,7 +116,7 @@ public class Bus extends Monster implements GeoAnimatable {
 
         this.goalSelector.removeGoal(waterAvoidingRandomFlyingGoal);
         this.goalSelector.removeGoal(meleeAttackGoal);
-        this.goalSelector.removeGoal(leapAtTargetGoal);
+        this.goalSelector.removeGoal(busJumpGoal);
         this.goalSelector.addGoal(2, busFlyAttackGoal);
     }
     public boolean isFlyingPhase(){
@@ -123,6 +125,6 @@ public class Bus extends Monster implements GeoAnimatable {
     public void subdued(){
         this.goalSelector.removeGoal(meleeAttackGoal);
         this.goalSelector.removeGoal(busFlyAttackGoal);
-        this.goalSelector.removeGoal(leapAtTargetGoal);
+        this.goalSelector.removeGoal(busJumpGoal);
     }
 }
